@@ -38,7 +38,7 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
 	return (newnode);
 }
 /**
- * delete_end_node - deletes node at end
+ * delete_endnode - deletes node at end
  * @h: pointer to head of doubly linked list
  */
 void delete_endnode(stack_t **h)
@@ -59,7 +59,7 @@ void delete_endnode(stack_t **h)
 	}
 }
 /**
-* free_dlistint - free
+* free_list - free
 * @head: address node
 * Return: void
 */

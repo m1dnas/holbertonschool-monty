@@ -1,7 +1,8 @@
 #include "monty.h"
 /**
-* _pall - print size of a list
+* pall - print size of a list
 * @h: number
+* @line_number: bytecode line number
 * Return: 0
 */
 void pall(stack_t **h, unsigned int line_number)
@@ -23,7 +24,6 @@ void pall(stack_t **h, unsigned int line_number)
  * push - add node to the start
  * @h: head of linked list
  * @line_number: bytecode line number
- * @n: integer
  */
 void push(stack_t **h, unsigned int line_number)
 {
@@ -42,7 +42,7 @@ void push(stack_t **h, unsigned int line_number)
 	{
 		if (add_end_node(h, atoi(n)) == -1)
 		{
-			free_list(h):
+			free_list(h);
 			exit(EXIT_FAILURE);
 		}
 	}
