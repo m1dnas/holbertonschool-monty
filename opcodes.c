@@ -1,48 +1,49 @@
 #include "monty.h"
 /**
-* _pallfunction - print size of a list
+* _pall - print size of a list
 * @h: number
 * Return: 0
 */
-size_t _pallfunction(const stack_t *h)
+void pall(stack_t **h, unsigned int line_number)
 {
-	int len = 0;
+	stack_t *len = NULL;
 
-	while (h != NULL)
+	if (!h || !*h)
+		return;
+
+	(void) line_number;
+	len = *h
+	while (len != NULL)
 	{
-		len++;
-		h = h->next;
+		printf("%d\n", len->n)
+		len = len->next;
 	}
-	return (0);
 }
-
 /**
-* pushfunction - add new node
-* @head: head
-* @n: node
-* Return: head
-*/
-stack_t *pushfunction(stack_t **head, const int n)
+ * push - add node to the start
+ * @h: head of linked list
+ * @line_number: bytecode line number
+ * @n: integer
+ */
+void push(stack_t **h, unsigned int line_number)
 {
-	stack_t *newnode;
+	const char *count;
 
-	newnode = malloc(sizeof(dlistint_t));
+	if (!h)
+		return;
 
-	if (newnode != NULL)
+	if (isdigit(atoi(count)) != 0)
 	{
-	newnode->n = n;
-	newnode->next = (*head);
-	newnode->prev = NULL;
+		printf("L%u: usage: push integer\n", line_number);
+		free_list(h);
+		exit(EXIT_FAILURE);
 	}
-	while (newnode)
+	else
 	{
-		if ((*head) != NULL)
+		if (add_end_node(h, atoi(n)) == -1)
 		{
-			(*head)->prev = NULL;
-			(*head)->prev = newnode;
+			free_list(h):
+			exit(EXIT_FAILURE);
 		}
-		(*head) = newnode;
-		return (*head);
 	}
-	return (NULL);
 }
