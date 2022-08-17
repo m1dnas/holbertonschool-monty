@@ -1,15 +1,21 @@
 #include "monty.h"
-
+/**
+* main - Stacks, Queues - LIFO, FIFO
+* @argc: counter
+* @argv: arguments
+* Return: 0 on success
+*/
 int main(int argc, char *argv[])
 {
-	int op, re, pu = 0;
+	int op, pusher = 0;
+	ssize_t re;
 	unsigned int line = 1;
-	char **buff, *token;
-	stack_t *h;
+	char *buff, *token;
+	stack_t *h = NULL;
 
 	if (argc != 2)
 	{
-		printf("USAGE: monty file\n");
+		write(STDERR_FILENO, "USAGE: monty file\n", 18);
 		exit(EXIT_FAILURE);
 	}
 	op = open(argv[1], O_RDONLY);
@@ -31,22 +37,40 @@ int main(int argc, char *argv[])
 		close(op);
 		exit(EXIT_FAILURE);
 	}
+	token = strtok(buff, "\n\t\a\r");
 	while (token != NULL)
 	{
-		if (pu == 1)
+		if (pusher == 1)
 		{
 			_push(&h, line, token);
-			pu = 0;
-			token = strtok(NULL, "\t\n\r\a");
+			pusher = 0;
+			token = strtok(NULL, "\n\t\a\r");
 			line++;
 			continue;
 		}
 		else if (strcmp(token, "push") == 0)
 		{
-			pu = 1;
-			token = strtok(NULL, " \t\n\r\a");
+			pusher = 1;
+			token = strtok(NULL, "\n\t\a\r");
 			continue;
 		}
+		else
+		{
+			if (get_op_func(token) != 0)
+			{
+				get_op_func(token)(&h, line);
+			}
+			else
+			{
+				free_list(&h);
+				printf("L%d: unknown instruction %s\n", line, token);
+				exit(EXIT_FAILURE);
+			}
+		}
+		line++;
+		token = strtok(NULL, "\n\t\a\r");
 	}
+	free_list(&h); free(buff);
+	close(op);
 	return (0);
 }

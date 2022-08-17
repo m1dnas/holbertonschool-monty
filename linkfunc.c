@@ -1,41 +1,39 @@
 #include "monty.h"
 
 /**
-* add_dnodeint_end - add a newnode at the end
-* @head: pointer to head of list
-* @n: node data
-* Return: newnoded
+* add_dnodeint - add new node
+* @h: head
+* @n: node
+* Return: head
 */
-stack_t *add_dnodeint_end(stack_t **head, const int n)
+int add_dnodeint(stack_t **h, int n)
 {
-	stack_t *last;
 	stack_t *newnode;
 
-	if (!head)
-		return (NULL);
+	if (!h)
+		return (-1);
 
-	newnode = malloc(sizeof(stack_t));
-
+	newnode = malloc(sizeof(struct stack_s));
 	if (!newnode)
-		return (NULL);
+	{
+		printf("Error: malloc failed");
+		return (-1);
+	}
 	newnode->n = n;
 
-	if (*head == NULL)
+	if (*h == NULL)
 	{
-		*head = newnode;
+		*h = newnode;
 		newnode->next = NULL;
 		newnode->prev = NULL;
-		return (newnode);
 	}
-
-	last = *head;
-	while (last->next != NULL)
-		last = last->next;
-	newnode->next = NULL;
-	newnode->prev = last;
-	last->next = newnode;
-
-	return (newnode);
+	else
+	{
+		newnode->next = *h;
+		(*h)->prev = newnode;
+		*h = newnode;
+	}
+	return (0);
 }
 /**
  * delete_endnode - deletes node at end
@@ -43,24 +41,24 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
  */
 void delete_endnode(stack_t **h)
 {
-	stack_t *del = NULL;
+	stack_t *delete = NULL;
 
-	del = *h;
+	delete = *h;
 	if ((*h)->next == NULL)
 	{
 		*h = NULL;
-		free(del);
+		free(delete);
 	}
 	else
 	{
 		*h = (*h)->next;
 		(*h)->prev = NULL;
-		free(del);
+		free(delete);
 	}
 }
 /**
 * free_list - free
-* @head: address node
+* @h: address node
 * Return: void
 */
 void free_list(stack_t **h)

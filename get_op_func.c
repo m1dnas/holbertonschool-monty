@@ -9,10 +9,10 @@ void (*get_op_func(char *s))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t instruction_s[] = {
 		{"pall", _pall},
-		{"pint", _pint},
+/**		{"pint", _pint},
 		{"swap", swap},
 		{"add", add},
-		{"nop", nop},
+		{"nop", nop},*/
 		{NULL, NULL}
 	};
 	int i;
