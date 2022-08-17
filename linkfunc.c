@@ -1,4 +1,22 @@
 #include "monty.h"
+/**
+* print_list - Print lists
+* @h: list
+* Return: count
+*/
+size_t print_list(const stack_t *h)
+{
+	size_t i = 0;
+
+	while (h)
+	{
+		if (&h->n != NULL)
+			printf("%d\n", h->n);
+		h = h->next;
+		i++;
+	}
+	return (i);
+}
 
 /**
 * add_dnodeint - add new node
@@ -13,7 +31,7 @@ int add_dnodeint(stack_t **h, int n)
 	if (!h)
 		return (-1);
 
-	newnode = malloc(sizeof(struct stack_s));
+	newnode = malloc(sizeof(stack_t));
 	if (!newnode)
 	{
 		printf("Error: malloc failed");

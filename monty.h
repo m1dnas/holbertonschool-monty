@@ -39,7 +39,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void (*get_op_func(char *s))(stack_t **stack, unsigned int line_number);
+void (*get_op_func(char *s))(stack_t **stack, unsigned int h);
 void _pall(stack_t **h, unsigned int line_number);
 void _push(stack_t **h, unsigned int line_number, const char *n);
 
@@ -47,4 +47,5 @@ int main(int argc, char *argv[]);
 void free_list(stack_t **h);
 int add_dnodeint(stack_t **h, int n);
 void delete_endnode(stack_t **h);
+size_t print_list(const stack_t *h);
 #endif

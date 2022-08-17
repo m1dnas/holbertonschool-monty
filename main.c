@@ -67,7 +67,8 @@ int main(int argc, char *argv[])
 		line++;
 		token = strtok(NULL, "\n\t\a\r ;:");
 	}
-	free_list(&h); free(buff);
+	free_list(&h);
+	free(buff);
 	close(op);
 	return (0);
 }
