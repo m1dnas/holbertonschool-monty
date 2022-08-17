@@ -33,7 +33,7 @@ void _push(stack_t **h, unsigned int line_number, const char *n)
 
 	if (isdigit(n) != 0 || (atoi(n) == 0 && *n != '0'))
 	{
-		printf("L%u: usage: push integer\n", line_number);
+		dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
 		free_list(h);
 		exit(EXIT_FAILURE);
 	}
