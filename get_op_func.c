@@ -20,7 +20,7 @@ void (*get_op_func(char *s))(stack_t **stack, unsigned int line_number)
 	i = 0;
 	while (instruction_s[i].f != NULL)
 	{
-		if (*(instruction_s[i].opcode) == s[0])
+		if (strcmp(s, instruction_s[i].opcode) == 0)
 		{
 			return (instruction_s[i].f);
 		}
