@@ -14,7 +14,7 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
 	if (!head)
 		return (NULL);
 
-	newnode = malloc(sizeof(dlistint_t));
+	newnode = malloc(sizeof(stack_t));
 
 	if (!newnode)
 		return (NULL);
@@ -63,14 +63,15 @@ void delete_endnode(stack_t **h)
 * @head: address node
 * Return: void
 */
-void free_list(stack_t *head)
+void free_list(stack_t **h)
 {
-	stack_t *lib;
+	if (!h)
+		return;
 
-	while (head)
+	while (*h && (*h)->next)
 	{
-		lib = head->next;
-		free(head);
-		head = lib;
+		*h = (*h)->next;
+		free((*h)->prev);
 	}
+	free(*h);
 }

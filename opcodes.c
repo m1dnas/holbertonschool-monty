@@ -5,7 +5,7 @@
 * @line_number: bytecode line number
 * Return: 0
 */
-void pall(stack_t **h, unsigned int line_number)
+void _pall(stack_t **h, unsigned int line_number)
 {
 	stack_t *len = NULL;
 
@@ -13,10 +13,10 @@ void pall(stack_t **h, unsigned int line_number)
 		return;
 
 	(void) line_number;
-	len = *h
+	len = *h;
 	while (len != NULL)
 	{
-		printf("%d\n", len->n)
+		printf("%d\n", len->n);
 		len = len->next;
 	}
 }
@@ -25,14 +25,12 @@ void pall(stack_t **h, unsigned int line_number)
  * @h: head of linked list
  * @line_number: bytecode line number
  */
-void push(stack_t **h, unsigned int line_number)
+void _push(stack_t **h, unsigned int line_number, const char *n)
 {
-	const char *count;
-
 	if (!h)
 		return;
 
-	if (isdigit(atoi(count)) != 0)
+	if (isdigit(n) != 0)
 	{
 		printf("L%u: usage: push integer\n", line_number);
 		free_list(h);
@@ -40,7 +38,7 @@ void push(stack_t **h, unsigned int line_number)
 	}
 	else
 	{
-		if (add_end_node(h, atoi(n)) == -1)
+		if (add_dnodeint_end(h, atoi(n)) == NULL)
 		{
 			free_list(h);
 			exit(EXIT_FAILURE);
