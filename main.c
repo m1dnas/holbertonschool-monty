@@ -32,12 +32,9 @@ int main(int argc, char *argv[])
 		token = strtok(buff, "\n\t\a\r ");
 		if (!token)
 			continue;
-
 		global_value = strtok(NULL, "\n\t\a\r ");
 		if (get_op_func(token))
-		{
 			get_op_func(token)(&h, line);
-		}
 		else
 		{
 			free_list(&h);
