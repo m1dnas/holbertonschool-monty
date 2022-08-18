@@ -1,4 +1,5 @@
 #include "monty.h"
+char *global_value = 0;
 /**
 * main - Stacks, Queues - LIFO, FIFO
 * @argc: counter
@@ -7,68 +8,48 @@
 */
 int main(int argc, char *argv[])
 {
-	int op, pusher = 0;
-	ssize_t re;
-	unsigned int line = 1;
+	FILE *op = NULL;
+	unsigned int line = 0;
 	char *buff = NULL, *token = NULL;
 	stack_t *h = NULL;
+	size_t buff_size = 0;
 
 	if (argc != 2)
 	{
+		printf("acá");
 		write(STDERR_FILENO, "USAGE: monty file\n", 18);
 		exit(EXIT_FAILURE);
 	}
-	op = open(argv[1], O_RDONLY);
-	if (op == -1)
+	op = fopen(argv[1], "r");
+	if (op == NULL)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	buff = malloc(sizeof(char) * 1024);
-	if (!buff)
-		return (0);
-	re = read(op, buff, 1024);
-	if (re == -1)
+	while (getline(&buff, &buff_size, op) != -1)
 	{
-		free(buff);
-		close(op);
-		exit(EXIT_FAILURE);
-	}
-	token = strtok(buff, "\n\t\a\r ");
-	while (token != NULL)
-	{
-		if (pusher == 1)
-		{
-			_push(&h, line, token);
-			pusher = 0;
-			token = strtok(NULL, "\n\t\a\r ");
-			line++;
+		line++;
+		global_value = 0;
+		token = strtok(buff, "\n\t\a\r ");
+		if (!token)
 			continue;
-		}
-		else if (strcmp(token, "push") == 0)
+
+		global_value = strtok(NULL, "\n\t\a\r ");
+		if (get_op_func(token))
 		{
-			pusher = 1;
-			token = strtok(NULL, "\n\t\a\r ");
-			continue;
+			get_op_func(token)(&h, line);
 		}
 		else
 		{
-			if (get_op_func(token) != 0)
-			{
-				get_op_func(token)(&h, line);
-			}
-			else
-			{
-				free_list(&h);
-				printf("L%d: unknown instruction %s\n", line, token);
-				exit(EXIT_FAILURE);
-			}
+			free_list(&h);
+			dprintf(STDERR_FILENO, "L%d: unknown instruction %s\n", line, token);
+			free(buff);
+			fclose(op);
+			exit(EXIT_FAILURE);
 		}
-		line++;
-		token = strtok(NULL, "\n\t\a\r ");
 	}
 	free_list(&h);
 	free(buff);
-	close(op);
+	fclose(op);
 	return (0);
 }

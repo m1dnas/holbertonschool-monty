@@ -41,8 +41,9 @@ typedef struct instruction_s
 
 void (*get_op_func(char *s))(stack_t **stack, unsigned int h);
 void _pall(stack_t **h, unsigned int line_number);
-void _push(stack_t **h, unsigned int line_number, const char *n);
+void _push(stack_t **h, unsigned int line_number);
 
+extern char *global_value;
 int main(int argc, char *argv[]);
 void free_list(stack_t **h);
 int add_dnodeint(stack_t **h, int n);

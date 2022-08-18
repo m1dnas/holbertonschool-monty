@@ -1,4 +1,5 @@
 #include "monty.h"
+char *global_value;
 int is_number(const char *token);
 /**
 * _pall - print size of a list
@@ -25,13 +26,12 @@ void _pall(stack_t **h, unsigned int line_number)
  * _push - add node to the start
  * @h: head of linked list
  * @line_number: bytecode line number
- * @n: integer
  */
-void _push(stack_t **h, unsigned int line_number, const char *n)
+void _push(stack_t **h, unsigned int line_number)
 {
 	if (!h)
 		return;
-	if (is_number(n) == -1)
+	if (is_number(global_value) == -1)
 	{
 		printf("L%u: usage: push integer\n", line_number);
 		free_list(h);
@@ -39,7 +39,7 @@ void _push(stack_t **h, unsigned int line_number, const char *n)
 	}
 	else
 	{
-		if (add_dnodeint(h, atoi(n)) == -1)
+		if (add_dnodeint(h, atoi(global_value)) == -1)
 		{
 			free_list(h);
 			exit(EXIT_FAILURE);
@@ -48,7 +48,7 @@ void _push(stack_t **h, unsigned int line_number, const char *n)
 }
 /**
 * is_number - is number or not
-* @token: token 
+* @token: token
 * Return: 1 if it's digit
 */
 int is_number(const char *token)

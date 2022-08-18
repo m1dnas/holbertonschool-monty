@@ -11,6 +11,7 @@ void (*get_op_func(char *s))(stack_t **stack, unsigned int h)
 
 	instruction_t opcodes[] = {
 		{"pall", _pall},
+		{"push", _push},
 		{NULL, NULL}
 	};
 

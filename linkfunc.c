@@ -81,13 +81,10 @@ void delete_endnode(stack_t **h)
 */
 void free_list(stack_t **h)
 {
-	if (!h)
-		return;
+	stack_t *p = (*h);
 
-	while (*h && (*h)->next)
+	for (; p; p = p->next)
 	{
-		*h = (*h)->next;
-		free((*h)->prev);
+		free(p);
 	}
-	free(*h);
 }
