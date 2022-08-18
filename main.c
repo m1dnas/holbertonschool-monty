@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	int op, pusher = 0;
 	ssize_t re;
 	unsigned int line = 1;
-	char *buff, *token;
+	char *buff = NULL, *token = NULL;
 	stack_t *h = NULL;
 
 	if (argc != 2)
@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	buff = malloc(sizeof(char) * 10000);
+	buff = malloc(sizeof(char) * 1024);
 	if (!buff)
 		return (0);
-	re = read(op, buff, 10000);
+	re = read(op, buff, 1024);
 	if (re == -1)
 	{
 		free(buff);

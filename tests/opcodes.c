@@ -1,4 +1,5 @@
 #include "monty.h"
+int is_number(const char *token);
 /**
 * _pall - print size of a list
 * @h: number
@@ -30,10 +31,9 @@ void _push(stack_t **h, unsigned int line_number, const char *n)
 {
 	if (!h)
 		return;
-
-	if (isdigit(n) != 0 || (atoi(n) == 0 && *n != '0'))
+	if (is_number(n) == -1)
 	{
-		dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
+		printf("L%u: usage: push integer\n", line_number);
 		free_list(h);
 		exit(EXIT_FAILURE);
 	}
@@ -45,4 +45,24 @@ void _push(stack_t **h, unsigned int line_number, const char *n)
 			exit(EXIT_FAILURE);
 		}
 	}
+}
+/**
+* is_number - is number or not
+* @token: token 
+* Return: 1 if it's digit
+*/
+int is_number(const char *token)
+{
+	int i;
+
+	if (token == NULL)
+		return (-1);
+	for (i = 0; token[i] != '\0'; i++)
+	{
+		if (isdigit(token[i]) == 0)
+		{
+			return (-1);
+		}
+	}
+	return (1);
 }
