@@ -62,7 +62,6 @@ void _swap(stack_t **stack, unsigned int line_number)
 void _add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *p = (*stack);
-	(void)line_number;
 
 	if (*stack == NULL)
 	{
