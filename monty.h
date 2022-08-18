@@ -49,4 +49,5 @@ void free_list(stack_t **h);
 int add_dnodeint(stack_t **h, int n);
 void delete_endnode(stack_t **h);
 size_t print_list(const stack_t *h);
+void _pint(stack_t **stack, unsigned int line_number);
 #endif
