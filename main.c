@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		printf("acá");
 		write(STDERR_FILENO, "USAGE: monty file\n", 18);
 		exit(EXIT_FAILURE);
 	}
