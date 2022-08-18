@@ -53,11 +53,13 @@ void _push(stack_t **h, unsigned int line_number)
 */
 int is_number(const char *token)
 {
-	int i;
+	int i = 0;
 
 	if (token == NULL)
 		return (-1);
-	for (i = 0; token[i] != '\0'; i++)
+	if (token[0] == '-')
+		i = 1;
+	for (; token[i] != '\0'; i++)
 	{
 		if (isdigit(token[i]) == 0)
 		{
