@@ -10,7 +10,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL)
 	{
-		dprintf(STDERR_FILENO, "L%u: can't pint, stack empty", line_number);
+		dprintf(STDERR_FILENO, "L%u: can't pint, stack empty\n", line_number);
 		exit(1);
 	}
 	printf("%i\n", (*stack)->n);
